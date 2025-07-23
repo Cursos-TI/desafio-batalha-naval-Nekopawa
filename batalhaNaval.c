@@ -22,9 +22,9 @@ int main() {
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
     //navio vertical
     int navio1[3][2] = {
-        {1, 2},
-        {2, 2},
-        {3, 2}
+        {1, 0},
+        {2, 0},
+        {3, 0}
     };
     
     //navio horizontal
@@ -53,7 +53,7 @@ int main() {
     for (int i = 0; i < 3; i++) {
         int navioX = navio2[i][0];
         int navioY = navio2[i][1];
-
+        
         //evitar sobreposição
         if (tabuleiro[navioX][navioY] == 0) {
             //valida coordenadas do navio
@@ -69,8 +69,58 @@ int main() {
             return 0;
         }
     }
-
+    
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
+    
+    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
+    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
+    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
+    int navioDiagonal1[1][2] = {{2, 2}};
+    int posicaoNavioX = navioDiagonal1[0][0];
+    int posicaoNavioY = navioDiagonal1[0][1];
+    
+    for (int i = 0; i < 3; i++) {
+        //valida coordenadas do navio
+        if ((posicaoNavioX >= 0 && posicaoNavioX <= 10) && (posicaoNavioY >= 0 && posicaoNavioY <= 10)) {
+            //valida sobreposição
+            if (tabuleiro[posicaoNavioX][posicaoNavioY] == 0) {
+                tabuleiro[posicaoNavioX][posicaoNavioY] = 3;
+                posicaoNavioX++;
+                posicaoNavioY++;
+            } else {
+                printf("Sobreposição de navios.\n");
+                return 0;
+            }
+        } else {
+            printf("\nCoordenadas do navio diagonal 1 inválidas");
+            return 0;
+        }
+        
+    }
+    
+    int navioDiagonal2[1][2] = {{0, 9}};
+    posicaoNavioX = navioDiagonal2[0][0];
+    posicaoNavioY = navioDiagonal2[0][1];
+
+    for (int i = 0; i < 3; i++) {
+        //valida coordenadas do navio
+        if ((posicaoNavioX >= 0 && posicaoNavioX <= 10) && (posicaoNavioY >= 0 && posicaoNavioY <= 10)) {
+            //valida sobreposição
+            if (tabuleiro[posicaoNavioX][posicaoNavioY] == 0) {
+                tabuleiro[posicaoNavioX][posicaoNavioY] = 3;
+                posicaoNavioX++;
+                posicaoNavioY--;
+            } else {
+                printf("Sobreposição de navios.\n");
+                return 0;
+            }
+        } else {
+            printf("\nCoordenadas do navio diagonal 1 inválidas");
+            return 0;
+        }
+    }
+
+    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
     printf("\n");
 
     for (int i = 0; i < 10; i++) {
@@ -105,11 +155,6 @@ int main() {
         printf("\n");  
     }
     
-    // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
-    // Sugestão: Expanda o tabuleiro para uma matriz 10x10.
-    // Sugestão: Posicione quatro navios no tabuleiro, incluindo dois na diagonal.
-    // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
-
     // Nível Mestre - Habilidades Especiais com Matrizes
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
