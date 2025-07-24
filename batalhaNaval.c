@@ -7,6 +7,9 @@
 int main() {
     // Nível Novato - Posicionamento dos Navios
     
+    #define tamanhoTabuleiro 10
+    #define tamanhoNavio 3
+
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     int tabuleiro[10][10];
     char verticalIndex = 'A';
@@ -22,46 +25,51 @@ int main() {
     }
 
     // Sugestão: Posicione dois navios no tabuleiro, um verticalmente e outro horizontalmente.
+    
     //navio vertical
     int navio1[1][2] = {{1, 0}};
     navioX = navio1[0][0];
     navioY = navio1[0][1];
 
-    for (int i = 0; i < 3; i++) {
-        //valida coordenadas do navio
-        if ((navioX >= 0 && navioY < 10) && (navioY >= 0 && navioY < 10)) {
+    printf("\n");
+    //valida coordenadas do navio previamente
+    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY >= 0 && navioY < 10)) {
+        for (int i = 0; i < tamanhoNavio; i++) {
             //mudar posição do tabuleiro para 3 quando tem um navio
+            printf("Coordenadas navio 1: X: %d | Y: %d\n", navioX, navioY);
             tabuleiro[navioX][navioY] = 3;
             navioX++;
-        } else {
-            printf("\nCoordenadas do navio 1 inválidas");
-            return 0;
         }
+    } else {
+        printf("\nCoordenadas do navio 1 inválidas");
+        return 0;
     }
-    
+ 
     //navio horizontal
     int navio2[1][2] = {{5, 4}};
     navioX = navio2[0][0];
     navioY = navio2[0][1];
 
-    for (int i = 0; i < 3; i++) {
-        //evita sobreposição
-        if (tabuleiro[navioX][navioY] == 0) {
-            //valida coordenadas do navio
-            if ((navioX >= 0 && navioY < 10) && (navioY >= 0 && navioY < 10)) {
-                //mudar posição do tabuleiro para 3 quando tem um navio
-                tabuleiro[navioX][navioY] = 3;
-                navioY++;
-            } else {
-                printf("\nCoordenadas do navio 2 inválidas");
-                return 0;
+    printf("\n");
+    //valida coordenadas do navio previamente
+    if ((navioX >= 0 && navioX < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
+        for (int i = 0; i < tamanhoNavio; i++) {
+            //evita sobreposição
+            if (tabuleiro[navioX][navioY] == 0) {
+                    //mudar posição do tabuleiro para 3 quando tem um navio
+                    printf("Coordenadas navio 2: X: %d | Y: %d\n", navioX, navioY);
+                    tabuleiro[navioX][navioY] = 3;
+                    navioY++;
+                } else {
+                    printf("Sobreposição de navios.\n");
+                    return 0;
+                }
             }
-        } else {
-            printf("Sobreposição de navios.\n");
-            return 0;
-        }
+    } else {
+        printf("\nCoordenadas do navio 2 inválidas");
+        return 0;
     }
-    
+        
     // Sugestão: Utilize `printf` para exibir as coordenadas de cada parte dos navios.
     
     // Nível Aventureiro - Expansão do Tabuleiro e Posicionamento Diagonal
@@ -71,34 +79,37 @@ int main() {
     navioX = navioDiagonal1[0][0];
     navioY = navioDiagonal1[0][1];
     
-    for (int i = 0; i < 3; i++) {
-        //valida coordenadas do navio
-        if ((navioX >= 0 && navioX < 10) && (navioY >= 0 && navioY < 10)) {
+    printf("\n");
+    //valida coordenadas do navio previamente
+    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
+        for (int i = 0; i < tamanhoNavio; i++) {
             //valida sobreposição
             if (tabuleiro[navioX][navioY] == 0) {
+                printf("Coordenadas navio diagonal 1: X: %d | Y: %d\n", navioX, navioY);
                 tabuleiro[navioX][navioY] = 3;
                 navioX++;
                 navioY++;
             } else {
                 printf("Sobreposição de navios.\n");
                 return 0;
-            }
-        } else {
-            printf("\nCoordenadas do navio diagonal 1 inválidas");
-            return 0;
+            }    
         }
-        
+    } else {
+        printf("\nCoordenadas do navio diagonal 1 inválidas");
+        return 0;
     }
     
     int navioDiagonal2[1][2] = {{0, 9}};
     navioX = navioDiagonal2[0][0];
     navioY = navioDiagonal2[0][1];
 
-    for (int i = 0; i < 3; i++) {
-        //valida coordenadas do navio
-        if ((navioX >= 0 && navioX < 10) && (navioY >= 0 && navioY < 10)) {
+    printf("\n");
+    //valida coordenadas do navio previamente
+    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY - 2 >= 0 && navioY - 2 < 10)) {
+        for (int i = 0; i < tamanhoNavio; i++) {
             //valida sobreposição
             if (tabuleiro[navioX][navioY] == 0) {
+                printf("Coordenadas navio diagonal 2: X: %d | Y: %d\n", navioX, navioY);
                 tabuleiro[navioX][navioY] = 3;
                 navioX++;
                 navioY--;
@@ -106,10 +117,10 @@ int main() {
                 printf("Sobreposição de navios.\n");
                 return 0;
             }
-        } else {
-            printf("\nCoordenadas do navio diagonal 1 inválidas");
-            return 0;
         }
+    } else {
+        printf("\nCoordenadas do navio diagonal 2 inválidas");
+        return 0;
     }
 
     // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
