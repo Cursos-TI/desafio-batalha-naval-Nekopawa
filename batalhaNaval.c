@@ -12,8 +12,6 @@ int main() {
 
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     int tabuleiro[10][10];
-    char verticalIndex = 'A';
-    int horizontalIndex = 0;
     int navioX;
     int navioY;
 
@@ -32,13 +30,20 @@ int main() {
     navioY = navio1[0][1];
 
     printf("\n");
-    //valida coordenadas do navio previamente
-    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY >= 0 && navioY < 10)) {
+    //valida coordenadas iniciais e finais do navio
+    if ((navioX >= 0 && navioX < 10) && (navioX + 2 >= 0 && navioX + 2 < 10) 
+        && (navioY >= 0 && navioY < 10)) {        
         for (int i = 0; i < tamanhoNavio; i++) {
-            //mudar posição do tabuleiro para 3 quando tem um navio
-            printf("Coordenadas navio 1: X: %d | Y: %d\n", navioX, navioY);
-            tabuleiro[navioX][navioY] = 3;
-            navioX++;
+            //evita sobreposição
+            if (tabuleiro[navioX][navioY] == 0) {
+                //mudar posição do tabuleiro para 3 quando tem um navio
+                printf("Coordenadas navio 1: X: %d | Y: %d\n", navioX, navioY);
+                tabuleiro[navioX][navioY] = 3;
+                navioX++;
+            } else {
+                printf("Sobreposição de navios.\n");
+                return 0;
+            }
         }
     } else {
         printf("\nCoordenadas do navio 1 inválidas");
@@ -51,20 +56,21 @@ int main() {
     navioY = navio2[0][1];
 
     printf("\n");
-    //valida coordenadas do navio previamente
-    if ((navioX >= 0 && navioX < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
+    //valida coordenadas iniciais e finais do navio
+    if ((navioX >= 0 && navioX < 10) 
+        && (navioY >= 0 && navioY < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
         for (int i = 0; i < tamanhoNavio; i++) {
             //evita sobreposição
             if (tabuleiro[navioX][navioY] == 0) {
-                    //mudar posição do tabuleiro para 3 quando tem um navio
-                    printf("Coordenadas navio 2: X: %d | Y: %d\n", navioX, navioY);
-                    tabuleiro[navioX][navioY] = 3;
-                    navioY++;
-                } else {
-                    printf("Sobreposição de navios.\n");
-                    return 0;
-                }
+                //mudar posição do tabuleiro para 3 quando tem um navio
+                printf("Coordenadas navio 2: X: %d | Y: %d\n", navioX, navioY);
+                tabuleiro[navioX][navioY] = 3;
+                navioY++;
+            } else {
+                printf("Sobreposição de navios.\n");
+                return 0;
             }
+        }
     } else {
         printf("\nCoordenadas do navio 2 inválidas");
         return 0;
@@ -80,8 +86,9 @@ int main() {
     navioY = navioDiagonal1[0][1];
     
     printf("\n");
-    //valida coordenadas do navio previamente
-    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
+    //valida coordenadas iniciais e finais do navio
+    if ((navioX >= 0 && navioX < 10) && (navioX + 2 >= 0 && navioX + 2 < 10) 
+        && (navioY >= 0 && navioY < 10) && (navioY + 2 >= 0 && navioY + 2 < 10)) {
         for (int i = 0; i < tamanhoNavio; i++) {
             //valida sobreposição
             if (tabuleiro[navioX][navioY] == 0) {
@@ -104,8 +111,9 @@ int main() {
     navioY = navioDiagonal2[0][1];
 
     printf("\n");
-    //valida coordenadas do navio previamente
-    if ((navioX + 2 >= 0 && navioX + 2 < 10) && (navioY - 2 >= 0 && navioY - 2 < 10)) {
+    //valida coordenadas iniciais e finais do navio
+    if ((navioX >= 0 && navioX < 10) && (navioX + 2 >= 0 && navioX + 2 < 10) 
+        && (navioY >= 0 && navioY < 10) && (navioY - 2 >= 0 && navioY - 2 < 10)) {
         for (int i = 0; i < tamanhoNavio; i++) {
             //valida sobreposição
             if (tabuleiro[navioX][navioY] == 0) {
@@ -126,6 +134,9 @@ int main() {
     // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
     printf("\n");
 
+    char verticalIndex = 'A';
+    int horizontalIndex = 0;
+    
     for (int i = 0; i < 10; i++) {
 
         //imprimir as letras das posições verticais (A - J)
