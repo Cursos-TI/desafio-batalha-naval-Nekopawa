@@ -8,6 +8,8 @@ int main() {
     // Nível Novato - Posicionamento dos Navios
     
     #define tamanhoTabuleiro 10
+    #define tamanhoHabilidadeX 3
+    #define tamanhoHabilidadeY 5
     #define tamanhoNavio 3
     #define AGUA 0
     #define NAVIO 3
@@ -173,17 +175,47 @@ int main() {
     // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
     // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
     // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    int metadeY = tamanhoHabilidadeY / 2;
+    int metadeX = tamanhoHabilidadeX / 2;
 
     // Exemplos de exibição das habilidades:
     // Exemplo para habilidade em cone:
     // 0 0 1 0 0
     // 0 1 1 1 0
     // 1 1 1 1 1
-    
+    printf("\nHabilidade cone:\n");
+    int habilidadeCone[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if (j >= metadeY - i && j <= metadeY + i) {
+                habilidadeCone[i][j] = 5;
+            } else {
+                habilidadeCone[i][j] = 0;
+            }
+            printf("%d ", habilidadeCone[i][j]);
+        }
+        printf("\n");
+    }
+   
     // Exemplo para habilidade em octaedro:
     // 0 0 1 0 0
     // 0 1 1 1 0
     // 0 0 1 0 0
+    printf("\nHabilidade octaedro:\n");
+    
+    int habilidadeOctaedro[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if ((j >= metadeY - i && j <= metadeY + i && i <= metadeX) 
+                || (j > metadeY - tamanhoHabilidadeX + i && j < metadeY + tamanhoHabilidadeX - i && i > metadeX)) {
+                habilidadeCone[i][j] = 5;
+            } else {
+                habilidadeCone[i][j] = 0;
+            }
+            printf("%d ", habilidadeCone[i][j]);
+        }
+        printf("\n");
+    }
 
     // Exemplo para habilidade em cruz:
     // 0 0 1 0 0
