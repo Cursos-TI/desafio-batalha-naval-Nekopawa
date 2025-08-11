@@ -13,6 +13,7 @@ int main() {
     #define tamanhoNavio 3
     #define AGUA 0
     #define NAVIO 3
+    #define HABILIDADE 1
 
     // Sugestão: Declare uma matriz bidimensional para representar o tabuleiro (Ex: int tabuleiro[5][5];).
     int tabuleiro[10][10];
@@ -188,9 +189,9 @@ int main() {
     for (int i = 0; i < tamanhoHabilidadeX; i++) {
         for (int j = 0; j < tamanhoHabilidadeY; j++) {
             if (j >= metadeY - i && j <= metadeY + i) {
-                habilidadeCone[i][j] = 5;
+                habilidadeCone[i][j] = HABILIDADE;
             } else {
-                habilidadeCone[i][j] = 0;
+                habilidadeCone[i][j] = AGUA;
             }
             printf("%d ", habilidadeCone[i][j]);
         }
@@ -208,9 +209,9 @@ int main() {
         for (int j = 0; j < tamanhoHabilidadeY; j++) {
             if ((j >= metadeY - i && j <= metadeY + i && i <= metadeX) 
                 || (j > metadeY - tamanhoHabilidadeX + i && j < metadeY + tamanhoHabilidadeX - i && i > metadeX)) {
-                habilidadeCone[i][j] = 5;
+                    habilidadeCone[i][j] = HABILIDADE;
             } else {
-                habilidadeCone[i][j] = 0;
+                habilidadeCone[i][j] = AGUA;
             }
             printf("%d ", habilidadeCone[i][j]);
         }
@@ -221,6 +222,20 @@ int main() {
     // 0 0 1 0 0
     // 1 1 1 1 1
     // 0 0 1 0 0
+    printf("\nHabilidade cruz:\n");
+    
+    int habilidadeCruz[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if (j == metadeY || i == metadeX) {
+                habilidadeCruz[i][j] = HABILIDADE;
+            } else {
+                habilidadeCruz[i][j] = AGUA;
+            }
+            printf("%d ", habilidadeCruz[i][j]);
+        }
+        printf("\n");        
+    }
 
     return 0;
 }
