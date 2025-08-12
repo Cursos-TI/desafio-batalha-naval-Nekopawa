@@ -134,6 +134,126 @@ int main() {
         return 0;
     }
 
+    // Nível Mestre - Habilidades Especiais com Matrizes
+    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
+    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
+    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
+    int metadeY = tamanhoHabilidadeY / 2;
+    int metadeX = tamanhoHabilidadeX / 2;
+
+    // Exemplos de exibição das habilidades:
+    // Exemplo para habilidade em cone:
+    // 0 0 1 0 0
+    // 0 1 1 1 0
+    // 1 1 1 1 1
+    printf("\nHabilidade cone:\n");
+    int habilidadeCone[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if (j >= metadeY - i && j <= metadeY + i) {
+                habilidadeCone[i][j] = HABILIDADE;
+            } else {
+                habilidadeCone[i][j] = AGUA;
+            }
+            printf("%d ", habilidadeCone[i][j]);
+        }
+        printf("\n");
+    }
+
+    // posição da habilidade no tabuleiro
+    int habilidadeX = 2;
+    int habilidadeY = 2;
+
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            int posicaoX = habilidadeX + i;
+            int posicaoY = habilidadeY + j;
+            
+            //validar se está dentro do tabuleiro
+            if ((posicaoX >= 0 && posicaoX < tamanhoTabuleiro)
+                && (posicaoY >= 0 && posicaoY < tamanhoTabuleiro)) {
+                if (habilidadeCone[i][j] == HABILIDADE && tabuleiro[posicaoX][posicaoY] == AGUA) {
+                    tabuleiro[posicaoX][posicaoY] = HABILIDADE;
+                }
+            }
+        }
+    }
+       
+    // Exemplo para habilidade em octaedro:
+    // 0 0 1 0 0
+    // 0 1 1 1 0
+    // 0 0 1 0 0
+    printf("\nHabilidade octaedro:\n");
+    
+    int habilidadeOctaedro[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if ((j >= metadeY - i && j <= metadeY + i && i <= metadeX) 
+                || (j > metadeY - tamanhoHabilidadeX + i && j < metadeY + tamanhoHabilidadeX - i && i > metadeX)) {
+                    habilidadeOctaedro[i][j] = HABILIDADE;
+            } else {
+                habilidadeOctaedro[i][j] = AGUA;
+            }
+            printf("%d ", habilidadeOctaedro[i][j]);
+        }
+        printf("\n");
+    }
+
+    habilidadeX = 5;
+    habilidadeY = 7;
+
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            int posicaoX = habilidadeX + i;
+            int posicaoY = habilidadeY + j;
+            
+            //validar se está dentro do tabuleiro
+            if ((posicaoX >= 0 && posicaoX < tamanhoTabuleiro)
+                && (posicaoY >= 0 && posicaoY < tamanhoTabuleiro)) {
+                if (habilidadeOctaedro[i][j] == HABILIDADE && tabuleiro[posicaoX][posicaoY] == AGUA) {
+                    tabuleiro[posicaoX][posicaoY] = HABILIDADE;
+                }
+            }
+        }
+    }
+
+    // Exemplo para habilidade em cruz:
+    // 0 0 1 0 0
+    // 1 1 1 1 1
+    // 0 0 1 0 0
+    printf("\nHabilidade cruz:\n");
+    
+    int habilidadeCruz[tamanhoHabilidadeX][tamanhoHabilidadeY];
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            if (j == metadeY || i == metadeX) {
+                habilidadeCruz[i][j] = HABILIDADE;
+            } else {
+                habilidadeCruz[i][j] = AGUA;
+            }
+            printf("%d ", habilidadeCruz[i][j]);
+        }
+        printf("\n");        
+    }
+
+    habilidadeX = 8;
+    habilidadeY = 4;
+
+    for (int i = 0; i < tamanhoHabilidadeX; i++) {
+        for (int j = 0; j < tamanhoHabilidadeY; j++) {
+            int posicaoX = habilidadeX + i;
+            int posicaoY = habilidadeY + j;
+            
+            //validar se está dentro do tabuleiro
+            if ((posicaoX >= 0 && posicaoX < tamanhoTabuleiro)
+                && (posicaoY >= 0 && posicaoY < tamanhoTabuleiro)) {
+                if (habilidadeCruz[i][j] == HABILIDADE && tabuleiro[posicaoX][posicaoY] == AGUA) {
+                    tabuleiro[posicaoX][posicaoY] = HABILIDADE;
+                }
+            }
+        }
+    }
+
     // Sugestão: Exiba o tabuleiro completo no console, mostrando 0 para posições vazias e 3 para posições ocupadas.
     printf("\n");
 
@@ -170,71 +290,6 @@ int main() {
         } 
 
         printf("\n");  
-    }
-    
-    // Nível Mestre - Habilidades Especiais com Matrizes
-    // Sugestão: Crie matrizes para representar habilidades especiais como cone, cruz, e octaedro.
-    // Sugestão: Utilize estruturas de repetição aninhadas para preencher as áreas afetadas por essas habilidades no tabuleiro.
-    // Sugestão: Exiba o tabuleiro com as áreas afetadas, utilizando 0 para áreas não afetadas e 1 para áreas atingidas.
-    int metadeY = tamanhoHabilidadeY / 2;
-    int metadeX = tamanhoHabilidadeX / 2;
-
-    // Exemplos de exibição das habilidades:
-    // Exemplo para habilidade em cone:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 1 1 1 1 1
-    printf("\nHabilidade cone:\n");
-    int habilidadeCone[tamanhoHabilidadeX][tamanhoHabilidadeY];
-    for (int i = 0; i < tamanhoHabilidadeX; i++) {
-        for (int j = 0; j < tamanhoHabilidadeY; j++) {
-            if (j >= metadeY - i && j <= metadeY + i) {
-                habilidadeCone[i][j] = HABILIDADE;
-            } else {
-                habilidadeCone[i][j] = AGUA;
-            }
-            printf("%d ", habilidadeCone[i][j]);
-        }
-        printf("\n");
-    }
-   
-    // Exemplo para habilidade em octaedro:
-    // 0 0 1 0 0
-    // 0 1 1 1 0
-    // 0 0 1 0 0
-    printf("\nHabilidade octaedro:\n");
-    
-    int habilidadeOctaedro[tamanhoHabilidadeX][tamanhoHabilidadeY];
-    for (int i = 0; i < tamanhoHabilidadeX; i++) {
-        for (int j = 0; j < tamanhoHabilidadeY; j++) {
-            if ((j >= metadeY - i && j <= metadeY + i && i <= metadeX) 
-                || (j > metadeY - tamanhoHabilidadeX + i && j < metadeY + tamanhoHabilidadeX - i && i > metadeX)) {
-                    habilidadeCone[i][j] = HABILIDADE;
-            } else {
-                habilidadeCone[i][j] = AGUA;
-            }
-            printf("%d ", habilidadeCone[i][j]);
-        }
-        printf("\n");
-    }
-
-    // Exemplo para habilidade em cruz:
-    // 0 0 1 0 0
-    // 1 1 1 1 1
-    // 0 0 1 0 0
-    printf("\nHabilidade cruz:\n");
-    
-    int habilidadeCruz[tamanhoHabilidadeX][tamanhoHabilidadeY];
-    for (int i = 0; i < tamanhoHabilidadeX; i++) {
-        for (int j = 0; j < tamanhoHabilidadeY; j++) {
-            if (j == metadeY || i == metadeX) {
-                habilidadeCruz[i][j] = HABILIDADE;
-            } else {
-                habilidadeCruz[i][j] = AGUA;
-            }
-            printf("%d ", habilidadeCruz[i][j]);
-        }
-        printf("\n");        
     }
 
     return 0;
